@@ -14,7 +14,7 @@ mysql_select_db("test", $con);
 return $con;
 }
 
-function milestones($top1, $top2, $top3) {
+function milestones($top) {
 
 $con = connectDatabase();
 
@@ -39,7 +39,7 @@ foreach ($dict_lensrank as $key => $newrank)
 		$oldrank = $dict_lensrank_best[$key];
 		if ( ($newrank - $oldrank) <= 0) {
 			print "better\n";
-			$ranking = compareRank($newrank, $oldrank, $top1, $top2, $top3);
+			$ranking = compareRank($newrank, $oldrank, $top);
 			if ($ranking != 0) {
 			$milestone_list[$key] = $ranking;
 			}
@@ -62,27 +62,10 @@ return $milestone_list;
 
 }
 
-function compareRank ($newRank, $oldRank, $top1, $top2, $top3) {
-	if ( ($newRank <= $top1) && ($oldRank > $top1)) 
-	{
-		print "top 100 rank\n";
-		return $top1;
-	}
-	elseif ( ($newRank <= $top2) && ($oldRank > $top2) )
-	{
-		print "top 500 rank\n";
-		return $top2;
-	}
-	elseif ( ($newRank <= $top3) && ($oldRank > $top3) )
-	{
-		print "top 1000 rank\n";
-		return $top3;
-	}
-	else {
-	return 0;
-	}
-}
+function compareRank ($newRank, $oldRank, $top) {
 
-milestones(100, 500, 1000);
+}
+$top = array(100, 500, 100);
+milestones($top);
 
 ?>
